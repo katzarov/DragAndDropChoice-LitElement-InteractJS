@@ -10,22 +10,23 @@ export class CountAction extends LitElement {
 
     render() {
         return html`
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
+      <button @click=${this._incCounter} part="button">
+        Increase Count
       </button>
     `;
     }
 
-    private _onClick() {
+    private _incCounter() {
         this.count++;
         this.dispatchEvent(new CustomEvent('count-inc', {
+            bubbles: true,
+            cancelable: false,
+            composed: true,
             detail: {
                 count: this.count,
-                
             }
-        }))
-
-    }
+        }));
+    };
 
 }
 
