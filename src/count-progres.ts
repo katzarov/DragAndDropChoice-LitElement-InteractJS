@@ -17,6 +17,10 @@ export class CountProgres extends LitElement {
         this.count = e.detail.count;
     }
 
+    disconnectedCallback() {
+        window.removeEventListener('count-inc', this.countIncremented.bind(this))
+    }
+
     render() {
         return html`You have clicked ${this.count} times
     `;
