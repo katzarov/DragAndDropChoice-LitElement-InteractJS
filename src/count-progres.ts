@@ -7,18 +7,18 @@ export class CountProgres extends LitElement {
 
     constructor() {
         super();
-        window.addEventListener('count-inc', this.countIncremented.bind(this))
+        window.addEventListener('count-inc', this.countIncremented)
     }
 
     @property({ type: Number })
     count = 0;
 
-    private countIncremented(e: any) {
+    private countIncremented = (e: any) => {
         this.count = e.detail.count;
     }
 
     disconnectedCallback() {
-        window.removeEventListener('count-inc', this.countIncremented.bind(this))
+        window.removeEventListener('count-inc', this.countIncremented)
     }
 
     render() {
@@ -32,3 +32,9 @@ declare global {
         'count-progres': CountProgres;
     }
 }
+
+// interface Event {
+//     detail: {
+//         count: number
+//     }
+// }
