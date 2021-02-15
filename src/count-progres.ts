@@ -1,24 +1,24 @@
 
 import { LitElement, html, customElement, property } from 'lit-element';
 
-
 @customElement('count-progres')
 export class CountProgres extends LitElement {
 
     constructor() {
         super();
-        window.addEventListener('count-inc', this.countIncremented.bind(this))
+        window.addEventListener('count-inc', this.countIncremented as EventListener)
     }
 
     @property({ type: Number })
     count = 0;
 
-    private countIncremented(e: any) {
+    
+    private countIncremented = (e: CustomEvent) => {
         this.count = e.detail.count;
     }
 
     disconnectedCallback() {
-        window.removeEventListener('count-inc', this.countIncremented.bind(this))
+        window.removeEventListener('count-inc', this.countIncremented as EventListener)
     }
 
     render() {
