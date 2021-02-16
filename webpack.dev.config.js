@@ -31,6 +31,7 @@ module.exports = {
     compress: true,
     port: 8080
   },
+  devtool: 'eval-cheap-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       title: "LitHTML Typescript Example",
