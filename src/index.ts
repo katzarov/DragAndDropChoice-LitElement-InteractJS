@@ -1,3 +1,3 @@
-import "./count-action";
-import "./count-progres";
-import "./main-app";
+import "./components/count-action";
+import "./components/count-progres";
+import "./components/main-app";

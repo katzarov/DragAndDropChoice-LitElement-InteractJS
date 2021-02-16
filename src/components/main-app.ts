@@ -9,7 +9,7 @@ import * as interact from 'interactjs'
 
 
 
-import { data } from './data';
+import { data } from '../data';
 
 @customElement('main-app')
 export class MainApp extends LitElement {
