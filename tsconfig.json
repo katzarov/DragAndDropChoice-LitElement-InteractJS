@@ -8,7 +8,7 @@
     "sourceMap": true,
     "outDir": "./dist/",
     "rootDir": "./src",
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
@@ -25,5 +25,5 @@
     ]
   },
   "include": ["src/**/*.ts"],
-  "exclude": []
+  "exclude": ["node_modules"]
 }
