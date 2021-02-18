@@ -2,34 +2,122 @@
 import "./draggable-item";
 import { LitElement, html, customElement } from 'lit-element';
 
-import * as interact from 'interactjs'
-// import {interactjs} from '../node_modules/interactjs/index'
-
-// import * as interact from 'interactjs/dist/interact.js';
-
-
+import interact from 'interactjs'
 
 import { data } from '../data';
 
 @customElement('main-app')
 export class MainApp extends LitElement {
 
-
     connectedCallback() {
         super.connectedCallback()
-        
-        console.log(interact)
-        
-    }
 
+        console.log(interact('.draggable'))
+        console.log(interact('.draggable').draggable())
+
+
+
+        interact('.draggable')
+            .draggable({
+                inertia: true,
+                autoScroll: true,
+                listeners: {
+                    // call this function on every dragmove event
+                    move: dragMoveListener,
+
+                    // call this function on every dragend event
+                    end(event) {
+                        var textEl = event.target.querySelector('p')
+
+                        textEl && (textEl.textContent =
+                            'moved a distance of ' +
+                            (Math.sqrt(Math.pow(event.pageX - event.x0, 2) +
+                                Math.pow(event.pageY - event.y0, 2) | 0))
+                                .toFixed(2) + 'px')
+                    }
+                }
+            })
+
+        function dragMoveListener(event) {
+            var target = event.target
+            // keep the dragged position in the data-x/data-y attributes
+            var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+            var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+            // translate the element
+            target.style.webkitTransform =
+                target.style.transform =
+                'translate(' + x + 'px, ' + y + 'px)'
+
+            // update the posiion attributes
+            target.setAttribute('data-x', x)
+            target.setAttribute('data-y', y)
+        }
+
+        interact('.dropzone').dropzone({
+            overlap: 0.75,
+            ondropactivate: function (event) {
+                // add active dropzone feedback
+                event.target.classList.add('drop-active')
+            },
+            ondragenter: function (event) {
+                var draggableElement = event.relatedTarget
+                var dropzoneElement = event.target
+
+                // feedback the possibility of a drop
+                dropzoneElement.classList.add('drop-target')
+                draggableElement.classList.add('can-drop')
+                draggableElement.textContent = 'Dragged in'
+            },
+            ondragleave: function (event) {
+                // remove the drop feedback style
+                event.target.classList.remove('drop-target')
+                event.relatedTarget.classList.remove('can-drop')
+                event.relatedTarget.textContent = 'Dragged out'
+            },
+            ondrop: function (event) {
+                event.relatedTarget.textContent = 'Dropped'
+            },
+            ondropdeactivate: function (event) {
+                // remove active dropzone feedback
+                event.target.classList.remove('drop-active')
+                event.target.classList.remove('drop-target')
+            }
+        })
+
+        interact('.drag-drop')
+            .draggable({
+                inertia: true,
+                modifiers: [
+                    interact.modifiers.restrictRect({
+                        restriction: 'parent',
+                        endOnly: true
+                    })
+                ],
+                autoScroll: true,
+                // dragMoveListener from the dragging demo above
+                listeners: { move: dragMoveListener }
+            })
+
+    }
 
     render() {
         return html`
         ${data.map(choice => html`
-            <draggable-item>
+            <draggable-item .id=${choice.id}>
                 ${choice.value}
             </draggable-item>
+
         `)}
+        
+        <div class="draggable drag-drop">
+            <p>
+                CONCRETE
+            </p>
+        </div>
+        <div class="dropzone" style="width: 600px; height: 200px; border: 1px solid black">shadow dropzone</div> 
+
+
     `;
     }
 }

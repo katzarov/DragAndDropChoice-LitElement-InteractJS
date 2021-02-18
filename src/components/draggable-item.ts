@@ -7,7 +7,7 @@ export class DraggableItem extends LitElement {
     static get styles() {
         return css`
           div { 
-                width: 25%;
+                width: 100px;
                 min-height: 6.5em;
                 margin: 1rem 0 0 1rem;
                 background-color: #29e;
@@ -17,13 +17,19 @@ export class DraggableItem extends LitElement {
                 touch-action: none;
                 user-select: none;
                 -webkit-transform: translate(0px, 0px);
-                transform: translate(0px, 0px);
+                transform: translate(0px, 0px);  
+                display: inline-block;
            }
         `;
     }
 
+    connectedCallback() {
+        super.connectedCallback()
+        console.log(this.id)
+    }
+
     render() {
-        return html`<div class="draggable">
+        return html`<div class="draggable drag-drop">
             <p>
                 <slot></slot>
             </p>
