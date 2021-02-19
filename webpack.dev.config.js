@@ -16,11 +16,20 @@ module.exports = {
         options: {
           configFile: "tsconfig.json"
         }
-      }
+      },
+      {
+        test: /\.css|\.s(c|a)ss$/,
+        use: [{
+          loader: 'lit-scss-loader',
+          options: {
+            minify: true, // defaults to false
+          },
+        }, 'extract-loader', 'css-loader', 'sass-loader'],
+      },
     ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: [".tsx", ".ts", ".js", ".css", ".scss"]
   },
   output: {
     filename: "bundle.js",

@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "es2015",
-    "lib": ["es2017", "dom", "dom.iterable"],
+    "lib": [
+      "es2017",
+      "dom",
+      "dom.iterable"
+    ],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -24,8 +28,14 @@
       }
     ]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*",
+    "node_modules/lit-scss-loader/types.d.ts",
+    "declarations.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
 // {
 //   "compilerOptions": {
