@@ -22,6 +22,19 @@ export class DragChoiceWrapper extends LitElement {
                     move: this.dragMoveListener,
                 }
             })
+
+            function generateChild() {
+                const newItem = document.createElement('drag-choice-element');
+                const id = Math.random();
+                newItem.id = id.toString();
+                newItem.textContent = id.toString();
+                return newItem;
+            }
+
+            const parent = document.getElementById("parent");
+            document.getElementById("add-item").onclick = function () {
+                parent.appendChild(generateChild());
+            };
     }
 
     dragMoveListener(event) {
