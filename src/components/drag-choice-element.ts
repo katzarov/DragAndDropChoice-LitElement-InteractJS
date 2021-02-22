@@ -1,7 +1,6 @@
-
 import { LitElement, html, customElement, property, CSSResultArray } from 'lit-element';
-import styles from './drag-choice-element.scss';
 
+import styles from './drag-choice-element.scss';
 
 @customElement('drag-choice-element')
 export class DragChoiceElement extends LitElement {
@@ -9,7 +8,7 @@ export class DragChoiceElement extends LitElement {
     static get styles(): CSSResultArray {
         return [styles];
     }
-  
+
     @property({ type: Boolean, reflect: true })
     selected = false;
 
@@ -22,10 +21,8 @@ export class DragChoiceElement extends LitElement {
     }
 
     render() {
-        return html`<div class="draggable drag-drop">
-          
-                <slot></slot>
-    
+        return html`<div class="drag-drop">
+            <slot></slot>
         </div>
     `;
     }
