@@ -8,14 +8,13 @@ export class DragChoiceElement extends LitElement {
         return [styles];
     }
 
-    @property({ type: Boolean, reflect: true, attribute: 'data-selected'})
-    selected = false;
+    @property({ type: String, reflect: true, attribute: 'data-selected'})
+    selected = "false";
 
     
     connectedCallback() {
         super.connectedCallback();
     }
-
 
     attributeChangedCallback(name, oldVal, newVal) {
         console.log('value of', this.id, 'changed to', newVal);
@@ -25,6 +24,7 @@ export class DragChoiceElement extends LitElement {
     render() {
         return html`<div class="drag-drop">
             <slot></slot>
+            ${this.selected}
         </div>
     `;
     }
