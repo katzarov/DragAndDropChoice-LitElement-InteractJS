@@ -8,24 +8,28 @@
   <title>Drag And Drop</title>
 </head>
 
-<body>
-  <drag-choice-wrapper id="parent">
+<body style="margin: 0; padding: 0;">
 
-  <drag-choice-element id="choice1">
-    <p>
-      Choice 1
-    </p>
-  </drag-choice-element>
+  <div class="container" style="height: 100vh; display: flex; flex-direction: column;">
 
-  <drag-choice-element id="choice2">
-    <p>
-      Choice 2
-    </p>
-  </drag-choice-element>
+    <button id="add-item">Add item</button>
 
-</drag-choice-wrapper>
+    <drag-choice-wrapper id="parent">
 
-<button id="add-item">Add item</button>
+      <drag-choice-element id="choice1">
+        <p>
+          Choice 1
+        </p>
+      </drag-choice-element>
+
+      <drag-choice-element id="choice2">
+        <p>
+          Choice 2
+        </p>
+      </drag-choice-element>
+
+    </drag-choice-wrapper>
+  </div>
 
 </body>
 

@@ -30,6 +30,8 @@ export class DragChoiceWrapper extends LitElement {
     }
 
     firstUpdated(): void {
+        // const self = this;
+        // registerDropzone(self);
         registerDropzone.call(this);
     }
 
